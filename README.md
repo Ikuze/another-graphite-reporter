@@ -43,8 +43,8 @@ Parameter:
 - **servers**: List of Strings. List of graphite servers ids configured in the global configuration.
 - **dataQueue**: String. The queue for the data to be sent. It will be concatenated with the global base queue name defined in the global configuration, but it will NOT use the run/job name in it, so that different jobs can send data to the same queue.
  
-- **data**: String. The data to be sent. I must be a string, and it must be a parsable float. "777,77" (comma) is NOT good. "777.77" (point) is good.
-- **fail**: Boolean. Whether to fail the build or not if there is a problem reporting to the graphite server. If it is set to true, the build will continue ok no matter what.
+- **data**: String. The data to be sent. It must be a string, and it must be a parsable float. "777,77" (comma) is NOT good. "777.77" (point) is good.
+- **fail**: Boolean. Whether to fail the build or not if there is a problem reporting to the graphite server. If it is set to false, the build will continue ok no matter what.
 
 
 ### graphite
@@ -59,7 +59,7 @@ Parameters:
   *  "result": the result of the build at the moment of the reporting. If used in the "post" section, it will report the final result of the build. If not, you need to handle the result by yourself. It reports a "1" only for the actual result.
   *  "tests": reports the number of failed, skipped and total test cases executed in the build. Be aware that the "passed" test number needs to be calculated: passed = total - skipped - failed.
 
-- **fail**: Boolean. Whether to fail the build or not if there is a problem reporting to the graphite server. If it is set to true, the build will continue ok no matter what.
+- **fail**: Boolean. Whether to fail the build or not if there is a problem reporting to the graphite server. If it is set to false, the build will continue ok no matter what.
 
 
 

@@ -17,6 +17,10 @@ f.entry(title: _("servers_port"), field: "port") {
     f.textbox()
 }
 
+f.entry(title: _("servers_verbose"), field: "verbose") {
+    f.checkbox()
+}
+
 f.block() {
     f.validateButton(
             title: _("test_server_connection"),

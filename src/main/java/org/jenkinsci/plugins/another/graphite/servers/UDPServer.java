@@ -17,10 +17,11 @@ public class UDPServer extends Server {
 
     @DataBoundConstructor
     public UDPServer(@NonNull String ip, @NonNull String port,
-                     @NonNull String id){
+                     @NonNull String id, @NonNull boolean verbose){
         this.ip = ip;
         this.id = id;
         this.port = port;
+        this.verbose = verbose;
     }
 
     @Override
@@ -35,15 +36,9 @@ public class UDPServer extends Server {
             sock = new DatagramSocket();
             DatagramPacket sendPacket = new DatagramPacket(buffer, buffer.length, IPAddress, intPort);
             sock.send(sendPacket);
-            if(logger != null){
-                logger.println("UDP SENT DATA: " + data);
+            if(logger != null && this.verbose){
+                logger.println("["+ this.ip + ":" + this.port + "] UDP SENT DATA: " + data);
             }
-        }
-        catch(IOException e) {
-            if(logger != null){
-                logger.println("There was an exception sending graphite UDP: " + e.toString());
-            }
-            e.printStackTrace();
         }
         finally {
             if(sock != null){

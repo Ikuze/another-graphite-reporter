@@ -132,7 +132,7 @@ public class MetricReporterStep extends Step {
             }
             catch(Exception e){
                 if(this.fail){
-                    listener.getLogger().println("EXCEPTION THROWN: ");
+                    listener.getLogger().println("EXCEPTION THROWN: " + e);
                     throw e;
                 }
                 else{

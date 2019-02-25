@@ -29,6 +29,7 @@ public abstract class Server extends AbstractDescribableImpl<Server> {
     protected String ip;
     protected String port;
     protected String id;
+    protected boolean verbose;
 
 
     public void setIp(@NonNull String ip) {
@@ -53,6 +54,14 @@ public abstract class Server extends AbstractDescribableImpl<Server> {
 
     public String getId() {
         return id;
+    }
+
+    public void setVerbose(@NonNull boolean verbose) {
+        this.verbose = verbose;
+    }
+
+    public boolean getVerbose() {
+        return verbose;
     }
 
     public void send(@NonNull List<Snapshot> snapshots, @NonNull long timestamp, 

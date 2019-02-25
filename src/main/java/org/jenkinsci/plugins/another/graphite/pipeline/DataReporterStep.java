@@ -133,14 +133,14 @@ public class DataReporterStep extends Step {
 
                 long timestamp = System.currentTimeMillis()/1000;
                 for(String serverId : this.serverIds){
-                    listener.getLogger().println(serverId);
+                    listener.getLogger().println("Sending data to graphite server: " + serverId);
                     Server server = this.getServerById(serverId);
                     server.send(snapshot, timestamp, listener.getLogger());
                 }
             }
             catch(Exception e){
                 if(this.fail){
-                    listener.getLogger().println("EXCEPTION THROWN: ");
+                    listener.getLogger().println("EXCEPTION THROWN: " + e);
                     throw e;
                 }
                 else{

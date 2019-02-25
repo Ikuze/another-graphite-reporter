@@ -16,26 +16,35 @@ public class TCPServer extends Server {
 
     @DataBoundConstructor
     public TCPServer(@NonNull String ip, @NonNull String port,
-                     @NonNull String id){
+                     @NonNull String id, @NonNull boolean verbose){
         this.ip = ip;
         this.id = id;
         this.port = port;
+        this.verbose = verbose;
     }
 
     @Override
     protected void send(@NonNull String queue, @NonNull String value,
                       @NonNull long timestamp, PrintStream logger) throws UnknownHostException, IOException  {
-        Socket conn = new Socket(this.getIp(), Integer.parseInt(this.getPort()));
-        
-        DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-        String data = queue + " " + value + " " + timestamp + "\n";
+        Socket conn = null;
 
-        if(logger != null){
-            logger.println("TCP SENT DATA: " + data);
+        try{ 
+            conn = new Socket(this.getIp(), Integer.parseInt(this.getPort()));
+            
+            DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+            String data = queue + " " + value + " " + timestamp + "\n";
+
+            if(logger != null && this.verbose){
+                logger.println("["+ this.ip + ":" + this.port + "] TCP SENT DATA : " + data);
+            }
+
+            dos.writeBytes(data);
         }
-
-        dos.writeBytes(data);
-        conn.close();
+        finally{
+            if(conn != null){
+                conn.close();
+            }
+        }
     }
 
     @Extension

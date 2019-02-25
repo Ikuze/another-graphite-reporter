@@ -135,6 +135,9 @@ public class DataReporterStep extends Step {
                 for(String serverId : this.serverIds){
                     listener.getLogger().println("Sending data to graphite server: " + serverId);
                     Server server = this.getServerById(serverId);
+                    if(server == null){
+                        listener.getLogger().println("Server does not exist! Server not configured!");
+                    }
                     server.send(snapshot, timestamp, listener.getLogger());
                 }
             }

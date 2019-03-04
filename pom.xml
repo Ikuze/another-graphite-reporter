@@ -88,6 +88,26 @@
             <artifactId>workflow-step-api</artifactId>
             <version>${workflow-step-api-plugin.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins.workflow</groupId>
+            <artifactId>workflow-api</artifactId>
+            <version>${workflow-api-plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins.workflow</groupId>
+            <artifactId>workflow-cps</artifactId>
+            <version>${workflow-cps-plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>pipeline-stage-step</artifactId>
+            <version>${pipeline-stage-step-plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins.workflow</groupId>
+            <artifactId>workflow-job</artifactId>
+            <version>${workflow-job-plugin.version}</version>
+        </dependency>
     </dependencies>
 
     <distributionManagement>
@@ -98,7 +118,11 @@
     </distributionManagement>
 
     <properties>
+        <workflow-job-plugin.version>2.11</workflow-job-plugin.version>
+        <pipeline-stage-step-plugin.version>2.2</pipeline-stage-step-plugin.version>
         <workflow-step-api-plugin.version>2.14</workflow-step-api-plugin.version>
+        <workflow-api-plugin.version>2.22</workflow-api-plugin.version>
+        <workflow-cps-plugin.version>2.41</workflow-cps-plugin.version>
         <maven-hpi-plugin.version>1.112</maven-hpi-plugin.version>
     </properties>
 </project>

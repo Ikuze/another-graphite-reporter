@@ -40,7 +40,7 @@ public class MetricTests extends GraphiteMetric {
             snapshots.add(snapshot.rebaseQueue(queue).rebaseQueue(run));
         }
         else{
-            this.log(logger, "No test found! Nothing to report.");
+            this.log(logger, "No tests found! Nothing to report.");
         }
 
         return snapshots;

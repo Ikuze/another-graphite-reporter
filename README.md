@@ -55,9 +55,10 @@ Parameters:
 
 - **servers**: List of Strings. List of graphite servers ids configured in the global configuration.
 - **metricNames**: List of Strings. List of the metrics to be reported. There are three metrics implemented:
-  *  "duration": reports the duration of the build since it began up to this moment. If used in the "post" section, it will report the duration of the whole build.
-  *  "result": the result of the build at the moment of the reporting. If used in the "post" section, it will report the final result of the build. If not, you need to handle the result by yourself. It reports a "1" only for the actual result.
-  *  "tests": reports the number of failed, skipped and total test cases executed in the build. Be aware that the "passed" test number needs to be calculated: passed = total - skipped - failed.
+  *  "_duration_": report the duration of the build since it began up to this moment. If used in the "post" section, it will report the duration of the whole build.
+  *  "_result_": the result of the build at the moment of the reporting. If used in the "post" section, it will report the final result of the build. If not, you need to handle the result by yourself. It reports a "1" only for the actual result.
+  *  "_tests_": report the number of failed, skipped and total junit test cases executed in the build. Be aware that the "passed" test number needs to be calculated: passed = total - skipped - failed.
+  *  "_stages_": report all stages and their duration up to the moment when the step is called. If used in the "post" section it will report all stages. It will remove the spaces in the stages' names. Remember that "post" section is a stage too, hence it will report the duration of the "post" section from the moment it began to the moment when the step is called. Try to make the "graphite" step the last step called in your "post" section if you can. Parallel stages are reported too.
 
 - **fail**: Boolean. Whether to fail the build or not if there is a problem reporting to the graphite server. If it is set to false, the build will continue ok no matter what.
 
@@ -71,7 +72,7 @@ Parameters:
       agent any
     
       stages{
-          stage("first"){
+          stage("First Stage"){
               steps{
                 graphiteData  servers:["myserver_one"], 
                               dataQueue:"testqueue.testvalue", 
@@ -83,7 +84,9 @@ Parameters:
 
       post{
           always{
-               graphite (servers:["myserver_two"], metricNames: ["result", "duration"], fail: true)
+               graphite (servers:["myserver_two"],
+                         metricNames: ["result", "duration", "stages"],
+                         fail: true)
           }       
       } 
 
@@ -94,6 +97,8 @@ This example will report `777.77` value to `$globalqueuename.testqueue.testvalue
 It will report `1` value to `$globalqueuename.$job_name.result.SUCCESS` queue in `server_two`.
 
 It will report the duration of the build in seconds to `$globalqueuename.$job_name.duration` queue in `server_two`.
+
+It will report the duration of the stage "_First Stage_" and the stage "_Declarative: Post Actions_" to `server_two`. Like this `$globalqueuename.$job_name.stages.FirstStage` and `$globalqueuename.$job_name.stages.Declarative:PostActions`.
 
 Had the build reported junit tests, we could have added the "results" metric to the metricNames list.
 

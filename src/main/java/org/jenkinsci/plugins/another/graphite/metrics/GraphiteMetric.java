@@ -49,7 +49,7 @@ public abstract class GraphiteMetric implements ExtensionPoint {
         }
 
         public Snapshot rebaseQueue(@NonNull String baseQueue){
-            if(baseQueue != ""){
+            if(!"".equals(baseQueue)){
                 this.setQueue(baseQueue.concat(".").concat(this.getQueue()));
             }
 

@@ -29,7 +29,7 @@ public class UDPServer extends Server {
                       @NonNull long timestamp, PrintStream logger) throws UnknownHostException, IOException  {
         String data = queue + " " + value + " " + timestamp + "\n";
         int intPort = Integer.parseInt(this.getPort());
-        byte[] buffer = data.getBytes();
+        byte[] buffer = data.getBytes("UTF-8");
         InetAddress IPAddress = InetAddress.getByName(this.getIp());
         DatagramSocket sock= null;
         try {

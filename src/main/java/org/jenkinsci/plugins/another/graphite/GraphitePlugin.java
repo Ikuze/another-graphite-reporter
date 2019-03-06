@@ -7,13 +7,17 @@ import jenkins.model.Jenkins;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.List;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import org.jenkinsci.plugins.another.graphite.metrics.GraphiteMetric;
 
 public class GraphitePlugin extends Plugin {
 
     private static final Logger LOGGER = Logger.getLogger(GraphitePlugin.class.getName());
-    public static final ArrayList<GraphiteMetric> allMetrics = new ArrayList<GraphiteMetric>();
+    @SuppressFBWarnings(value="MS_SHOULD_BE_FINAL", justification="TODO.")
+    public static  ArrayList<GraphiteMetric> allMetrics = new ArrayList<GraphiteMetric>();
+
 
     @Initializer(after = InitMilestone.EXTENSIONS_AUGMENTED, before = InitMilestone.JOB_LOADED)
     public static void afterExtensionsAugmented() {

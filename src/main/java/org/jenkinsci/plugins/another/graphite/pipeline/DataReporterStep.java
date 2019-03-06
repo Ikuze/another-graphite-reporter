@@ -118,7 +118,6 @@ public class DataReporterStep extends Step {
         @Override
         protected Void run() throws Exception {
             TaskListener listener = getContext().get(TaskListener.class);
-            Run run = getContext().get(Run.class);
             try{
                 //Verify that the user didnt make a mistake inserting the data.
                 // If we dont do that, the data will be sent without any problem but
@@ -137,6 +136,7 @@ public class DataReporterStep extends Step {
                     Server server = this.getServerById(serverId);
                     if(server == null){
                         listener.getLogger().println("Server does not exist! Server not configured!");
+                        throw new RuntimeException("Server " + serverId + " does not exist! Server not configured!");
                     }
                     server.send(snapshot, timestamp, listener.getLogger());
                 }
@@ -154,7 +154,6 @@ public class DataReporterStep extends Step {
             return null;
         }
 
-        @NonNull
         public Server getServerById(@NonNull String serverId) {
             GlobalConfig globalConfig = GlobalConfiguration.all().get(GlobalConfig.class);
 

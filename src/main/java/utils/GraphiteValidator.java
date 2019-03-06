@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 
 public class GraphiteValidator {
 
-    final String portPatern = "^[0-9]+$";
+    static final String portPatern = "^[0-9]+$";
 
     public boolean validateIpFormat(String ip) {
         InetSocketAddress add = new InetSocketAddress(ip, 0);

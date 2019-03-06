@@ -25,11 +25,11 @@ public class MetricDuration extends GraphiteMetric {
         // Depending on the jenkins version build duration will have a value or not
         //  if the build has not finished. If there is no value, we calculate it.
         if(run.getDuration() != 0){
-            duration = String.valueOf((new Long(run.getDuration()).intValue() / 1000));
+            duration = String.valueOf(run.getDuration()/1000);
             this.log(logger, "Metric Duration: " + duration + " seconds.");
         }
         else{
-            duration = String.valueOf((new Long((System.currentTimeMillis() - run.getStartTimeInMillis())/1000)));
+            duration = String.valueOf((System.currentTimeMillis() - run.getStartTimeInMillis())/1000);
             this.log(logger, "Metric Calculated Duration: " + duration + " seconds.");
         }
 

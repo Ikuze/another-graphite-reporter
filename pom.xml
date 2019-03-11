@@ -100,7 +100,12 @@
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>junit</artifactId>
-            <version>1.2</version>
+            <version>1.23</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>script-security</artifactId>
+            <version>1.50</version>
         </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins.workflow</groupId>
@@ -140,6 +145,12 @@
             <version>${workflow-basic-steps-plugin.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins.workflow</groupId>
+            <artifactId>workflow-durable-task-step</artifactId>
+            <version>${workflow-durable-task-step-plugin.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <distributionManagement>
@@ -152,6 +163,7 @@
     <properties>
         <jenkins.version>2.121.1</jenkins.version>
         <java.level>8</java.level>
+        <workflow-durable-task-step-plugin.version>2.4</workflow-durable-task-step-plugin.version>
         <workflow-basic-steps-plugin.version>2.0</workflow-basic-steps-plugin.version>
         <workflow-support-plugin.version>2.22</workflow-support-plugin.version>
         <workflow-job-plugin.version>2.26</workflow-job-plugin.version>
